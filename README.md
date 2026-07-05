@@ -1,4 +1,4 @@
- # Galen AI
+# Galen AI
 **TEKNOFEST 2026 — Sağlıkta Yapay Zeka Yarışması | Üniversite ve Üzeri**
 
 ## Project Overview
@@ -26,4 +26,29 @@ disease-specific panel models — and provides SHAP-based explainability for eac
 ## Key Features
 - **Anonymous pipeline**: Model trained with anonymized column names (f0–f8) 
   to comply with competition constraints
-- **SHAP explainability**: Feature group
+- **SHAP explainability**: Feature group analysis for all 4 panels
+- **Threshold optimization**: Systematic sweep from 0.30 to 0.65 for clinical 
+  risk scenarios
+- **Class imbalance handling**: class_weight='balanced' for PAH and CFTR panels
+- **Clinical Stress Test awareness**: Threshold strategy adjusted for 
+  Benign-dominant test sets
+
+## Tech Stack
+| Library | Version |
+|---|---|
+| lightgbm | 4.6.0 |
+| scikit-learn | 1.6.1 |
+| shap | 0.51.0 |
+| pandas | 2.2.2 |
+| numpy | 2.0.2 |
+
+## How to Run
+1. Open `GalenAI.ipynb` in Google Colab
+2. Upload `variant_summary.txt.gz` from ClinVar to `/content/`
+3. Run all cells sequentially
+4. All experiments use `random_state=42` for full reproducibility
+
+## Data
+Training data: NCBI ClinVar `variant_summary.txt.gz`  
+- 300,000 rows loaded, 170,691 usable variants after filtering  
+- Labels: Pathogenic + Likely Pathogenic → 1, Benign + Likely Benign → 0
